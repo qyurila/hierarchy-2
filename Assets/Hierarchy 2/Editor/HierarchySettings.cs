@@ -145,6 +145,7 @@ namespace Hierarchy2
         [HideInInspector] public int componentLimited = 0;
         [Range(12, 16)] public int componentSize = 16;
         public int componentSpacing = 0;
+        public int componentRightMargin = 2;
         public bool displayTag = true;
         public ElementAlignment tagAlignment = ElementAlignment.AfterName;
         public bool displayLayer = true;
@@ -416,6 +417,19 @@ namespace Hierarchy2
                         settings.OnSettingsChanged(nameof(settings.componentSpacing));
                     });
                     verticalLayout.Add(componentSpacing);
+
+                    var componentRightMargin = new IntegerField();
+                    componentRightMargin.label = "Component Right Margin";
+                    componentRightMargin.value = settings.componentRightMargin;
+                    componentRightMargin.StyleMarginLeft(CONTENT_MARGIN_LEFT);
+                    componentRightMargin.RegisterValueChangedCallback((evt) =>
+                    {
+                        Undo.RecordObject(settings, "Change Settings");
+
+                        settings.componentRightMargin = evt.newValue;
+                        settings.OnSettingsChanged(nameof(settings.componentRightMargin));
+                    });
+                    verticalLayout.Add(componentRightMargin);
 
                     var TagAndLayer = new Label("Tag And Layer");
                     TagAndLayer.StyleFont(FontStyle.Bold);

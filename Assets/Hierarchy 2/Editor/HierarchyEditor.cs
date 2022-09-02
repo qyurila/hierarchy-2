@@ -918,7 +918,7 @@ namespace Hierarchy2
             else
             {
                 widthUsedCached = widthUse.right;
-                widthUse.right += 2;
+                widthUse.right += settings.componentRightMargin;
             }
 
             for (int i = 0; i < length; ++i)
